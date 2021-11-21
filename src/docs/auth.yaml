@@ -1,0 +1,86 @@
+paths:
+  /auth/login:
+    post: # POST /auth/login
+      tags: [Authentication]
+      summary: Login to the application
+      produces: application/json
+      security: []
+      parameters:
+        - name: studentid
+          description: user's studentid
+          required: true
+          schema:
+            type: string
+        - name: password
+          description: user's password
+          required: true
+          schema:
+            type: string
+      responses:
+        "200": # Success
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: jwtToken
+                    description: generate jwt token and send back to client
+                  msg:
+                    type: string
+                    example: login successful
+                    description: login successful
+        "401": # Unauthorized
+          description: Unauthorized user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: unauthorized user
+                    description: unauthorized user
+  /auth/refresh:
+    get: # GET /auth/refresh
+      tags: [Authentication]
+      summary: Refresh user's token
+      produces: application/json
+      parameters:
+        - name: token
+          in: header
+          description: jwt token after logged in
+          required: true
+          schema:
+            type: string
+      responses:
+        "200": # Success
+          description: Refresh successful
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: TOKEN=jwtToken;
+                description: add jwt token to cookie and send back to client
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: refresh successful
+                    description: refresh successful
+        "401": # Unauthorized
+          description: Unauthorized user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: unauthorized user
+                    description: unauthorized user

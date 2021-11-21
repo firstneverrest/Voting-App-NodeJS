@@ -1,0 +1,104 @@
+paths:
+  /content/{event_name}:
+    get: # GET /content/:event_name
+      tags: [Content]
+      summary: Get content for a given event
+      produces: application/json
+      security: []
+      responses:
+        "200":
+          description: Found event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event_name:
+                    type: string
+                    example: "event_name"
+                    description: "event_name"
+                  content:
+                    type: array
+                    example:
+                      [
+                        {
+                          "_id": 2,
+                          "event_name": "cuexpo-mascot-2021",
+                          "name_en": "Life on the steert",
+                          "name_th": "Life on the steert",
+                          "creator_name_th": "Mike Von",
+                          "creator_name_en": "Mike Von",
+                          "idea_th": "Life on the steert",
+                          "idea_en": "Life on the steert",
+                          "creator_fac_en": "Science",
+                          "creator_fac_th": "วิทยาศาสตร์",
+                          "images":
+                            [
+                              "https://images.unsplash.com/photo-1635432235191-40e1b91b4536?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80",
+                              "https://images.unsplash.com/photo-1635432219921-6044ce873467?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80",
+                              "https://images.unsplash.com/photo-1634749015508-2ce82b32d2a7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80",
+                              "https://images.unsplash.com/photo-1633703903433-e3052dcf7681?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=987&q=80",
+                            ],
+                        },
+                      ]
+        "404": # Success
+          description: Not Found Event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Not found event name
+                    description: Not found event name
+
+  /content/{id}:
+    post: # GET /content/:id
+      tags: [Content]
+      summary: Get content for a given event
+      produces: application/json
+      parameters:
+        - name: token
+          in: header
+          description: jwt token after logged in
+          required: true
+          schema:
+            type: string
+
+      security: []
+      responses:
+        "200":
+          description: Found event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mag:
+                    type: string
+                    example: "content updated"
+                    description: "content updated"
+
+        "404": # Success
+          description: Not Found Event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Not found event name
+                    description: Not found event name
+        "401": # Unauthorized
+          description: Unauthorized user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: unauthorized user
+                    description: unauthorized user
