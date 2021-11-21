@@ -1,6 +1,3 @@
-// CONFIGURATION SWAGGER - API DOCUMENT
-// EXTENDED: https://swagger.io/specification/#infoObject
-
 import swaggerJSDoc, { Options } from "swagger-jsdoc"
 
 const swaggerOptions: Options = {
