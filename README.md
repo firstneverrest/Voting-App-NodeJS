@@ -139,8 +139,8 @@ paths:
       produces: application/json
       security: []
       parameters:
-        - name: studentid
-          description: user's studentid
+        - name: username
+          description: username
           required: true
           schema:
             type: string
